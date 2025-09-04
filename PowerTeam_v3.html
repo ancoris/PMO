@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerTeam Implementation Roadmap - Telana</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @page {
+            size: A3 landscape;
+            margin: 5mm;
+        }
+        
+        body {
+            font-family: 'Sora', Arial, sans-serif;
+            background: white;
+            padding: 5px;
+            color: #0A243B;
+            font-size: 8px;
+        }
+        
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            background: white;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            padding: 6px;
+            background: #0A243B;
+            color: white;
+        }
+        
+        h1 {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .subtitle {
+            color: #A9C0CB;
+            font-size: 8px;
+            margin-top: 2px;
+        }
+        
+        .telana-logo {
+            color: #FF4448;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Effort Profile Bar */
+        .effort-profile {
+            display: grid;
+            grid-template-columns: 100px 200px 200px 1fr;
+            margin-bottom: 6px;
+            background: #DFEDF4;
+            padding: 4px;
+            border-left: 4px solid #0A243B;
+        }
+        
+        .effort-label {
+            background: #0A243B;
+            color: white;
+            padding: 4px;
+            font-size: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .effort-phase {
+            text-align: center;
+            padding: 4px;
+            border-right: 1px solid #A9C0CB;
+            position: relative;
+        }
+        
+        .effort-phase h4 {
+            font-size: 8px;
+            color: #0A243B;
+            font-weight: 600;
+        }
+        
+        .effort-phase p {
+            font-size: 7px;
+            color: #105576;
+        }
+        
+        .build-gradient {
+            background: linear-gradient(90deg, #31E771 0%, #A9C0CB 100%);
+            padding: 8px;
+            text-align: center;
+            color: #0A243B;
+            font-weight: 600;
+        }
+        
+        /* Main Grid */
+        .main-container {
+            display: grid;
+            grid-template-columns: 140px 1fr 140px;
+            gap: 6px;
+        }
+        
+        /* Left Panel */
+        .left-panel {
+            background: #DFEDF4;
+            border-left: 3px solid #31E771;
+            padding: 5px;
+        }
+        
+        .panel-title {
+            font-size: 8px;
+            font-weight: 600;
+            color: #0A243B;
+            margin-bottom: 4px;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #FF4448;
+        }
+        
+        .team-section {
+            margin-bottom: 6px;
+            background: white;
+            padding: 4px;
+            border-radius: 2px;
+        }
+        
+        .team-section h4 {
+            font-size: 8px;
+            color: white;
+            background: #31E771;
+            color: #0A243B;
+            padding: 2px 4px;
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+        
+        .team-list {
+            font-size: 6px;
+            line-height: 1.3;
+            color: #105576;
+        }
+        
+        /* Center - Phases */
+        .phases-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .year-section {
+            background: white;
+            border: 1px solid #A9C0CB;
+            padding: 4px;
+        }
+        
+        .year-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #0A243B;
+        }
+        
+        .year-label {
+            background: #0A243B;
+            color: white;
+            padding: 4px 8px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+        
+        .phases-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
+        
+        .phase-card {
+            background: white;
+            border: 1px solid #A9C0CB;
+            padding: 4px;
+            position: relative;
+        }
+        
+        .phase-card.green {
+            background: #E8F4E8;
+            border: 1px solid #31E771;
+        }
+        
+        .phase-card.red {
+            background: #FFE8E8;
+            border: 1px solid #FF4448;
+        }
+        
+        .phase-id {
+            background: #31E771;
+            color: #0A243B;
+            padding: 2px 4px;
+            font-size: 7px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 2px;
+        }
+        
+        .phase-id.red {
+            background: #FF4448;
+            color: white;
+        }
+        
+        .phase-title {
+            font-size: 7px;
+            font-weight: 600;
+            color: #0A243B;
+            margin-bottom: 3px;
+        }
+        
+        .phase-goals {
+            font-size: 6px;
+            line-height: 1.3;
+            color: #105576;
+            padding-left: 6px;
+            border-left: 2px solid #31E771;
+            margin: 3px 0;
+        }
+        
+        /* Right Panel */
+        .right-panel {
+            background: #DFEDF4;
+            border-right: 3px solid #0081FF;
+            padding: 5px;
+        }
+        
+        .scrum-model {
+            background: white;
+            padding: 4px;
+            margin-bottom: 6px;
+            border-radius: 2px;
+        }
+        
+        .scrum-cycle {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            margin: 4px 0;
+        }
+        
+        .scrum-step {
+            background: #0081FF;
+            color: white;
+            padding: 3px;
+            text-align: center;
+            font-size: 6px;
+            border-radius: 2px;
+        }
+        
+        /* Collaboration Bar */
+        .collab-bar {
+            grid-column: span 3;
+            background: #FFD000;
+            color: #0A243B;
+            padding: 4px;
+            text-align: center;
+            font-size: 8px;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+        
+        /* Agile Delivery Grid */
+        .agile-delivery {
+            grid-column: span 3;
+            display: flex;
+            gap: 1px;
+            background: #FF8C00;
+            padding: 2px;
+            margin: 4px 0;
+        }
+        
+        .sprint-block {
+            flex: 1;
+            background: #FFD000;
+            height: 20px;
+            border-right: 1px solid #FF8C00;
+        }
+        
+        /* Bottom CI/CD Bar */
+        .cicd-bar {
+            grid-column: span 3;
+            background: #0A243B;
+            color: white;
+            padding: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
+        }
+        
+        .cicd-label {
+            font-size: 8px;
+            font-weight: 600;
+        }
+        
+        .cicd-flow {
+            display: flex;
+            gap: 8px;
+            font-size: 7px;
+        }
+        
+        .cicd-step {
+            background: #105576;
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+        
+        /* Future section */
+        .future-section {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            margin-top: 4px;
+            padding: 4px;
+            background: #DFEDF4;
+            border: 1px solid #0A243B;
+        }
+        
+        .future-year {
+            background: white;
+            padding: 4px;
+            text-align: center;
+            border: 1px solid #A9C0CB;
+        }
+        
+        .future-year h5 {
+            font-size: 8px;
+            color: #0A243B;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .future-year p {
+            font-size: 6px;
+            color: #105576;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>PowerTeam 5-Year Implementation Roadmap</h1>
+                <div class="subtitle">Agile Delivery Within Phase Framework | Build to Run Transition | Continuous Application Lifecycle Management</div>
+            </div>
+            <div class="telana-logo">TELANA</div>
+        </div>
+        
+        <!-- Effort Profile -->
+        <div class="effort-profile">
+            <div class="effort-label">Effort Profile</div>
+            <div class="effort-phase">
+                <h4>Year 1</h4>
+                <p>Core Build</p>
+            </div>
+            <div class="effort-phase">
+                <h4>Year 2</h4>
+                <p>Enhancement & Adoption</p>
+            </div>
+            <div class="build-gradient">
+                Build ――――――――――――――→ Run
+                <div style="font-size: 6px; margin-top: 2px;">Years 3-5: Managed Service & Support</div>
+            </div>
+        </div>
+        
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <div class="panel-title">POWERTEAM EVOLUTION</div>
+                
+                <div class="team-section">
+                    <h4>Year 1 - Full Team</h4>
+                    <div class="team-list">
+                        • Project Manager/PMO<br>
+                        • Solution Architect<br>
+                        • Business Analysts (2-3)<br>
+                        • Developers (4-5)<br>
+                        • Data Migration Specialist<br>
+                        • Integration Specialist<br>
+                        • QA/Test Lead<br>
+                        • Change Manager<br>
+                        <strong>100% Capacity</strong>
+                    </div>
+                </div>
+                
+                <div class="team-section">
+                    <h4>Year 2 - Optimised</h4>
+                    <div class="team-list">
+                        • Core Developers (2-3)<br>
+                        • Part-time Architect<br>
+                        • Business Analyst (1)<br>
+                        • Support Engineers (2)<br>
+                        • PMO (Part-time)<br>
+                        <strong>~70% Capacity</strong>
+                    </div>
+                </div>
+                
+                <div class="team-section">
+                    <h4>Years 3-5 - On-Demand</h4>
+                    <div class="team-list">
+                        • Specialist Consultants<br>
+                        • Advisory Architect<br>
+                        • Escalation Support<br>
+                        • Innovation Lab<br>
+                        <strong>As-Needed</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Center - Phases Timeline -->
+            <div class="phases-timeline">
+                <!-- Year 1 Phases -->
+                <div class="year-section">
+                    <div class="year-header">
+                        <div class="year-label">YEAR 1</div>
+                        <div style="font-size: 8px; color: #105576;">Initial Period - Core Build</div>
+                    </div>
+                    <div class="phases-row">
+                        <!-- P1.1 -->
+                        <div class="phase-card green">
+                            <div class="phase-id">P1.1</div>
+                            <div class="phase-title">Architecture Definition</div>
+                            <div class="phase-goals">
+                                • Data discovery<br>
+                                • Initial workshops<br>
+                                • Scope definition<br>
+                                • HLD & Technical design<br>
+                                • Requirements alignment
+                            </div>
+                        </div>
+                        
+                        <!-- P1.2 -->
+                        <div class="phase-card red">
+                            <div class="phase-id red">P1.2</div>
+                            <div class="phase-title">Core Deployment</div>
+                            <div class="phase-goals">
+                                • Deploy Accelerator<br>
+                                • Provision Environ.s (Dev/Test/Prod)<br>
+                                • Configure Security Roles<br>
+                                • PowerPlatform setup<br>
+                                • Tenant configuration
+                            </div>
+                        </div>
+                        
+                        <!-- P1.3 -->
+                        <div class="phase-card green">
+                            <div class="phase-id">P1.3</div>
+                            <div class="phase-title">Customisation to MVP</div>
+                            <div class="phase-goals">
+                                • Initial data migration<br>
+                                • MVP app customisations<br>
+                                • MVP integrations<br>
+                                • Living documentation<br>
+                                • Integration testing
+                            </div>
+                        </div>
+                        
+                        <!-- P1.4 -->
+                        <div class="phase-card red">
+                            <div class="phase-id red">P1.4</div>
+                            <div class="phase-title">Scale Out (multi tenant)</div>
+                            <div class="phase-goals">
+                                • Multi tenant deployment<br>
+                                • GPMF Business Unit Go-Live<br>
+                                • Marine Business Unit Go-Live<br>
+                                • Full UAT/OAT<br>
+                                • Performance testing
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Continuous Collaboration Bar -->
+                <div class="collab-bar">Continuous collaboration and discovery →</div>
+                
+                <!-- Year 2 Phase -->
+                <div class="year-section">
+                    <div class="year-header">
+                        <div class="year-label">YEAR 2</div>
+                        <div style="font-size: 8px; color: #105576;">Enhancement & Adoption</div>
+                    </div>
+                    <div class="phases-row" style="grid-template-columns: 1fr;">
+                        <!-- P2.1 -->
+                        <div class="phase-card green">
+                            <div class="phase-id">P2.1</div>
+                            <div class="phase-title">Consolidate and Refine</div>
+                            <div class="phase-goals">
+                                • User Adoption & Feedback Analysis<br>
+                                • Advanced Analytics & EVM Reporting<br>
+                                • Center of Excellence (CoE) Handover<br>
+                                • v1 Development and delivery<br>
+                                • 3rd party integrations<br>
+                                • Knowledge transfer & Industry accelerators
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Agile Delivery Sprints -->
+                <div class="agile-delivery">
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                    <div class="sprint-block"></div>
+                </div>
+                
+                <!-- Future Years -->
+                <div class="future-section">
+                    <div class="future-year">
+                        <h5>YEAR 3</h5>
+                        <p><strong>Scale & Optimize</strong><br>
+                        • Major enhancements<br>
+                        • Architecture review<br>
+                        • Performance tuning<br>
+                        • Advanced integrations<br>
+                        • Managed Service model</p>
+                    </div>
+                    <div class="future-year">
+                        <h5>YEAR 4</h5>
+                        <p><strong>Innovate</strong><br>
+                        • AI/ML integration<br>
+                        • Technology refresh<br>
+                        • Complex solutions<br>
+                        • Process automation<br>
+                        • Strategic consultation</p>
+                    </div>
+                    <div class="future-year">
+                        <h5>YEAR 5</h5>
+                        <p><strong>Sustain & Mature</strong><br>
+                        • Annual reviews<br>
+                        • Escalation support<br>
+                        • Platform evolution<br>
+                        • Advisory services<br>
+                        • Minimal maintenance</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <div class="panel-title">CORE DELIVERY MODEL</div>
+                
+                <div class="scrum-model">
+                    <h5 style="font-size: 8px; color: #0A243B; margin-bottom: 4px;">Scrum Framework</h5>
+                    <div class="scrum-cycle">
+                        <div class="scrum-step">Plan</div>
+                        <div class="scrum-step">Build</div>
+                        <div class="scrum-step">Test</div>
+                        <div class="scrum-step">Demo</div>
+                    </div>
+                    <div style="font-size: 6px; text-align: center; margin-top: 4px;">
+                        Incorporate feedback → Customer demo
+                    </div>
+                </div>
+                
+                <div class="panel-title" style="margin-top: 6px;">ALM PIPELINE</div>
+                <div style="font-size: 6px; line-height: 1.3; background: white; padding: 4px; border-radius: 2px;">
+                    • Development<br>
+                    • Test Environment<br>
+                    • UAT Environment<br>
+                    • Pre-Production<br>
+                    • <strong style="color: #FF4448;">Production (Multi-Tenant)</strong>
+                </div>
+                
+                <div class="panel-title" style="margin-top: 6px;">AGILE DELIVERY</div>
+                <div style="font-size: 6px; line-height: 1.3; color: #105576;">
+                    • 2-Week Sprints<br>
+                    • Daily Stand-ups<br>
+                    • Sprint Reviews<br>
+                    • Retrospectives<br>
+                    • Continuous Integration<br>
+                    • Incremental Delivery
+                </div>
+                
+                <div style="background: #31E771; color: #0A243B; padding: 4px; margin-top: 6px; text-align: center; font-size: 7px; font-weight: 600;">
+                    MVP DELIVERY: JULY 2026
+                </div>
+            </div>
+        </div>
+        
+        <!-- CI/CD Bar -->
+        <div class="cicd-bar">
+            <div class="cicd-label">Core Delivery Model (Scrum)</div>
+            <div class="cicd-flow">
+                <span>Plan → Build →</span>
+                <div class="cicd-step">CI/CD, Daily stand-ups</div>
+                <span>→ Customer demo</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
