@@ -1,7 +1,279 @@
-<h2>PMO Options</h2>
-<ul>
-  <li><a href="PMOv1.html">Power Team v1</a></li>
-  <li><a href="PMOv2_.html">Power Team v2</a></li>
-  <li><a href="PowerTeam_v3.html">Power Team v3</a></li>
-  <li><a href="PoverTeam_v4.html">Power Team v4</a></li>
-</ul>
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMO PowerTeam Options - Telana</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Sora', Arial, sans-serif;
+            background: linear-gradient(135deg, #DFEDF4 0%, #F5F5F5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #0A243B;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(10, 36, 59, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #0A243B;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '/';
+            position: absolute;
+            top: -20px;
+            right: 50px;
+            font-size: 120px;
+            font-weight: 300;
+            color: #FF4448;
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+        
+        h1 {
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            color: #A9C0CB;
+            font-size: 14px;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .telana-brand {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #FF4448;
+            z-index: 1;
+        }
+        
+        .telana-brand span {
+            color: white;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        h2 {
+            color: #0A243B;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #31E771;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .option-card {
+            position: relative;
+            background: white;
+            border: 2px solid #A9C0CB;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(10, 36, 59, 0.15);
+            border-color: #31E771;
+        }
+        
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #31E771 0%, #0081FF 100%);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .option-card:hover::before {
+            transform: translateX(0);
+        }
+        
+        .version-badge {
+            background: #FF4448;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        
+        .option-card:nth-child(1) .version-badge {
+            background: #31E771;
+            color: #0A243B;
+        }
+        
+        .option-card:nth-child(2) .version-badge {
+            background: #FFD000;
+            color: #0A243B;
+        }
+        
+        .option-card:nth-child(3) .version-badge {
+            background: #0081FF;
+            color: white;
+        }
+        
+        .option-card:nth-child(4) .version-badge {
+            background: #8B4789;
+            color: white;
+        }
+        
+        .option-title {
+            color: #0A243B;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .option-description {
+            color: #105576;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .arrow {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: #31E771;
+            font-size: 20px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+        
+        .option-card:hover .arrow {
+            transform: translateX(5px);
+        }
+        
+        .footer {
+            background: #DFEDF4;
+            padding: 20px;
+            text-align: center;
+            color: #105576;
+            font-size: 12px;
+        }
+        
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .tech-badge {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #0A243B;
+            border: 1px solid #A9C0CB;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="telana-brand">TELA<span>/</span>NA</div>
+            <h1>PMO PowerTeam Roadmap Evolution</h1>
+            <p class="subtitle">Document version history and refinements</p>
+        </div>
+        
+        <div class="content">
+            <h2>Available Implementation Versions</h2>
+            
+            <div class="options-grid">
+                <a href="PMOv1.html" class="option-card">
+                    <span class="version-badge">Version 1</span>
+                    <h3 class="option-title">PowerTeam v1</h3>
+                    <p class="option-description">Foundation implementation with core Project Accelerator features and essential customisations</p>
+                    <span class="arrow">→</span>
+                </a>
+                
+                <a href="PMOv2_.html" class="option-card">
+                    <span class="version-badge">Version 2</span>
+                    <h3 class="option-title">PowerTeam v2</h3>
+                    <p class="option-description">Enhanced deployment with advanced integrations and extended PowerPlatform capabilities</p>
+                    <span class="arrow">→</span>
+                </a>
+                
+                <a href="PowerTeam_v3.html" class="option-card">
+                    <span class="version-badge">Version 3</span>
+                    <h3 class="option-title">PowerTeam v3</h3>
+                    <p class="option-description">Full-scale implementation including AI capabilities and comprehensive data migration</p>
+                    <span class="arrow">→</span>
+                </a>
+                
+                <a href="PoverTeam_v4.html" class="option-card">
+                    <span class="version-badge">Version 4</span>
+                    <h3 class="option-title">PowerTeam v4</h3>
+                    <p class="option-description">Enterprise solution with complete customisation, predictive analytics, and managed services</p>
+                    <span class="arrow">→</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by Microsoft Project Accelerator</p>
+            <div class="tech-badges">
+                <span class="tech-badge">PowerApps</span>
+                <span class="tech-badge">Dataverse</span>
+                <span class="tech-badge">PowerBI</span>
+                <span class="tech-badge">Power Automate</span>
+                <span class="tech-badge">Copilot AI</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
